@@ -1,5 +1,6 @@
 document.write("<script type='text/javascript' src='/src/Map.js'><" + "/script>");
 
+//카테고리 버튼 표시용 div
 categorysel = document.createElement("div");
 categorysel.className = "categorywrap";
 document.body.appendChild(categorysel);
@@ -25,10 +26,12 @@ categorysel.addEventListener('click', function (e) {
         updatecode("");
         infowindow.close();
         sidebarclose();
+        removeOverlay()
     } else {
         currclick = e.target.id;
         updatecode(e.target.id);
         infowindow.close();
+        removeOverlay()
     }
 });
 

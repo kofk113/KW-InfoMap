@@ -6,18 +6,18 @@ document.body.appendChild(mapwrap);
 // 지도를 표시할 div
 var mapOption = {
     center: new kakao.maps.LatLng(37.6208, 127.0593), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
+    level: 3 
 };
 
 // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapwrap, mapOption);
 
-//마커& 인포 윈도우
+//마커 & 인포 윈도우
 var infowindow = new kakao.maps.InfoWindow({
     zIndex: 1,
     removable: true
 });
-// 커스텀 오버레이를 생성합니다
+// 커스텀 오버레이 생성
 var customOverlay = new kakao.maps.CustomOverlay({ zIndex: 1, map: map, removable: true })
 
 var markers = [], //마커를 담을 배열
@@ -26,13 +26,13 @@ var markers = [], //마커를 담을 배열
 // 장소 검색 객체 생성
 var ps = new kakao.maps.services.Places(map);
 
-// 카테고리 검색을 요청하는 함수입니다
+// 카테고리 검색 요청 함수
 function searchPlaces() {
     if (!currCategory) {
         return;
     }
 
-    // 지도에 표시되고 있는 마커를 제거합니다
+    // 지도위 마커를 제거
     removeMarker();
     removeOverlay()
     switch (currCategory) {
@@ -88,16 +88,11 @@ function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         displayPlaces(data);
-    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
-    } else if (status === kakao.maps.services.Status.ERROR) {
-        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
-    }
+    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {} 
+    else if (status === kakao.maps.services.Status.ERROR) {}
 }
 
-// 지도에 마커를 표출하는 함수입니다
+// 지도에 마커를 표출하는 함수
 function displayPlaces(places) {
 
     menuEl = document.getElementById('sidebar-wrapper');
@@ -118,6 +113,7 @@ function displayPlaces(places) {
             infowindow.setContent('<div class="infowin">' + place.place_name+'</div>');
             infowindow.open(map, marker);
         });
+        //마커, 사이드 바에 대한 함수
         (function(marker, title) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
@@ -134,18 +130,13 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
-            // itemEl.onclick=function () {
-            //     displayInfowindow(marker, title);
-                
-            // };
-            
         })(marker, places[i].place_name);
-    listEl.appendChild(itemEl);// 여기서 
+    listEl.appendChild(itemEl);
 
     }
 }
 
-//마우스 오버함수
+//마커 마우스 오버함수
 function displayInfowindow(marker, title) {
     infowindow.setContent('<div class="infowin">' + title+'</div>');
     infowindow.open(map, marker);
@@ -183,13 +174,13 @@ function removeOverlay() {
 }
 
 
-// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
+// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시 함수
 function displayPlaceInfo(place) {
     customOverlay.setPosition(place);
     customOverlay.setMap(map);
 }
 
-//사이드바 구현
+//사이드바 내용 
 function getListItem(index, places) {
 
     var el = document.createElement('div'),
@@ -228,6 +219,7 @@ function kwSidebar(innum) {
     return el;
 }
 
+//사이드바 제거
 function sidebarclose(){
     menuEl = document.getElementById('sidebar-wrapper');
     listStr = '';

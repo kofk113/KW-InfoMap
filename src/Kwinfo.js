@@ -1,5 +1,4 @@
 //학교 건물들 좌표
-//학교건물 좌표
 var kwpositions = [
 
     {   //화도
@@ -26,12 +25,10 @@ var kwpositions = [
         title: "옥의관",
         latlng: new kakao.maps.LatLng(37.618872, 127.059187)
     },
-    
     {   //누리
         title: "누리관",
         latlng: new kakao.maps.LatLng(37.620435, 127.054894)
     },
-    
     {   //80기념관(도서관)
         title: "80주년기념관(도서관)",
         latlng: new kakao.maps.LatLng(37.620084, 127.058764)
@@ -296,6 +293,7 @@ var kwcontent=[
     }
 ]
 
+//학교용 사이드바 내용 
 var kwside=[
     {
         scon :  '<div class="infosidebar">' +
